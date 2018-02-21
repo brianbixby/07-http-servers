@@ -20,13 +20,14 @@ const server = http.createServer(function(req, res) {
     res.end();
   }
   // http :3000/cowsay text=='brianis the man'
+  // http :3000/cowsay text=='brianis the man' f=='dragon'
   if(req.method === 'GET' && req.url.pathname === '/cowsay') {
     let params = req.url.query;
     if(params.text) {
       res.writeHead(200, {
         'Content-Type': 'text/plain',
       });
-      res.write(cowsay.say({ text: params.text }));
+      res.write(cowsay.say({ text: params.text, f: params.f }));
     }
     else {
       res.writeHead(400, {
@@ -37,19 +38,21 @@ const server = http.createServer(function(req, res) {
     res.end();
   }
   // http POST :3000/cowsay name=brian
+  // http :3000/cowsay name=brian f=='dragon'
   if(req.method === 'POST' && req.url.pathname === '/cowsay') {
+    let params = req.url.query;
     parseBody(req, function() {
       if(req.body.name) {
         res.writeHead(200, {
           'Content-Type': 'text/plain',
         });
-        res.write(cowsay.say({ text: req.body.name }));
+        res.write(cowsay.say({ text: req.body.name, f: params.f }));
       }
       else {
         res.writeHead(400, {
           'Content-Type': 'text/plain',
         });
-        res.write(cowsay.say({ text: 'bad request ' }));
+        res.write(cowsay.say({ text: 'bad request ', f: params.f }));
       }
       res.end();
     });
