@@ -8,15 +8,19 @@
   * contains a `lint` script for running the linter
   * contains a `start` script for running the server
   * contains a `test` script for running Jest
-* **lib/** - contains module definitions
+* **lib/** - contains module definition (parse-body)
+* **server.js** - vanilla Javascript HTTP server
 
 ## Feature Tasks  
-For this assignment, you will be building a TCP chatroom. Clients should be able to connect to the chatroom through the use of telnet. Clients should also be able to run special commands to exit the chatroom, list all users, reset their nickname, and send direct messages. You may add as many features to this application as you would like. Do not use any third party libraries and testing is *not* required.
+For this assignment, I built a vanilla Javascript HTTP server. There are 3 route methods defined, a get route for the homepage, get and route for '/cowsay' and a post route for '/cowsay'.
 
-##### Commands
-* @all: message all users
-* @dm [username]: direct message a user
-* @quit: logout
-* @list: list all users logged on
-* @nickname: change your nickname
-* @help: show command options
+##Instructions
+Please fork this repo and install all dependencies (npm i -S) from inside the lab-brian folder. Please Make sure that you have the npm package httpie installed globally on your local machine. Open up the terminal and from inside the lab-brian folder enter the following command into your command line "node server.js". Open up a new tab in terminal and enter in the following command "http :3000" (a homepage get route). 
+
+##Sample Commands
+  *  '/' GET route: http :3000
+  *  '/cowsay' GET route: http :3000/cowsay text=='Brian is the man'
+     '/cowsay' GET route:http :3000/cowsay text=='Brian is the man' f=='dragon'
+      * changes the cow to a dragon, please visit https://github.com/piuccio/cowsay/tree/master/cows for a full list of compatable animals
+  *  '/cowsay' POST route:   http POST :3000/cowsay name=brian
+  *  '/cowsay' POST route:   http :3000/cowsay name=brian f=='dragon'
