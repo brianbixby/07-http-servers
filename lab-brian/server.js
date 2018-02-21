@@ -19,7 +19,7 @@ const server = http.createServer(function(req, res) {
     res.write('hello from my server!\n');
     res.end();
   }
-
+  // http :3000/cowsay text=='brianis the man'
   if(req.method === 'GET' && req.url.pathname === '/cowsay') {
     let params = req.url.query;
     if(params.text) {
@@ -36,8 +36,24 @@ const server = http.createServer(function(req, res) {
     }
     res.end();
   }
-
-
+  // http POST :3000/cowsay name=brian
+  if(req.method === 'POST' && req.url.pathname === '/cowsay') {
+    parseBody(req, function() {
+      if(req.body.name) {
+        res.writeHead(200, {
+          'Content-Type': 'text/plain',
+        });
+        res.write(cowsay.say({ text: req.body.name }));
+      }
+      else {
+        res.writeHead(400, {
+          'Content-Type': 'text/plain',
+        });
+        res.write(cowsay.say({ text: 'bad request ' }));
+      }
+      res.end();
+    });
+  }
   // console.log('full req obj', req);
   // console.log('req url: ', req.url);
   // console.log('req method: ', req.method);
