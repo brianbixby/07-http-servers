@@ -10,6 +10,7 @@ module.exports = function(req, callback) {
       req.body = JSON.parse(req.body);
       callback(null, req.body);
     }catch(err) {
+      console.log(err);
       callback(err);
     }
   });
